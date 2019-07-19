@@ -1,0 +1,52 @@
+server:
+  port: ${PORT:8080}
+  compression:
+    enabled: true
+    min-response-size: 2048
+    mime-types: text/html,text/css,application/javascript,application/json
+  servlet:
+    context-path: /playground
+
+spring:
+  servlet:
+    multipart:
+      enabled: true
+      file-size-threshold: 2KB
+      max-file-size: 2MB
+      max-request-size: 5MB
+  h2:
+    console:
+      enabled: true
+  data:
+    rest:
+      basePath: /api
+  datasource:
+    url: jdbc:h2:~/.playground/database;MODE=MYSQL;DB_CLOSE_DELAY=-1
+    driverClassName: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    show-sql: true
+    database-platform: org.hibernate.dialect.MySQL5Dialect
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        format_sql: true
+  liquibase:
+    contexts: dev
+
+management:
+  endpoints:
+    web:
+      base-path: /management
+      exposure:
+        include: "*"
+
+api:
+  base-url: http://localhost:${server.port}${server.servlet.context-path}
+  client-id: 11327f30-3c22-11e9-b210-d663bd873d93
+  client-secret: 1569d4d6-3c22-11e9-b210-d663bd873d93
+
+storage:
+  location: .playground/storage

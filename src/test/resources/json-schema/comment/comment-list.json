@@ -1,0 +1,235 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "required": [
+    "content",
+    "pageable",
+    "last",
+    "totalPages",
+    "totalElements",
+    "size",
+    "number",
+    "sort",
+    "numberOfElements",
+    "first",
+    "empty"
+  ],
+  "properties": {
+    "content": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "user",
+          "idea",
+          "message",
+          "createAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "user": {
+            "type": "object",
+            "required": [
+              "id",
+              "email"
+            ],
+            "properties": {
+              "id": {
+                "type": "integer"
+              },
+              "email": {
+                "type": "string"
+              }
+            }
+          },
+          "idea": {
+            "type": "object",
+            "required": [
+              "id",
+              "user",
+              "category",
+              "stats",
+              "title",
+              "description",
+              "createAt"
+            ],
+            "properties": {
+              "id": {
+                "type": "integer"
+              },
+              "user": {
+                "type": "object",
+                "required": [
+                  "id",
+                  "email"
+                ],
+                "properties": {
+                  "id": {
+                    "type": "integer"
+                  },
+                  "email": {
+                    "type": "string"
+                  }
+                }
+              },
+              "category": {
+                "type": "object",
+                "required": [
+                  "id",
+                  "name",
+                  "description",
+                  "image"
+                ],
+                "properties": {
+                  "id": {
+                    "type": "integer"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "image": {
+                    "type": "string"
+                  }
+                }
+              },
+              "stats": {
+                "type": "object",
+                "required": [
+                  "likes",
+                  "dislikes",
+                  "joins",
+                  "comments"
+                ],
+                "properties": {
+                  "likes": {
+                    "type": "integer"
+                  },
+                  "dislikes": {
+                    "type": "integer"
+                  },
+                  "joins": {
+                    "type": "integer"
+                  },
+                  "comments": {
+                    "type": "integer"
+                  }
+                }
+              },
+              "title": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              },
+              "createAt": {
+                "type": "string"
+              }
+            }
+          },
+          "message": {
+            "type": "string"
+          },
+          "createAt": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "pageable": {
+      "type": "object",
+      "required": [
+        "sort",
+        "offset",
+        "pageSize",
+        "pageNumber",
+        "paged",
+        "unpaged"
+      ],
+      "properties": {
+        "sort": {
+          "type": "object",
+          "required": [
+            "sorted",
+            "unsorted",
+            "empty"
+          ],
+          "properties": {
+            "sorted": {
+              "type": "boolean"
+            },
+            "unsorted": {
+              "type": "boolean"
+            },
+            "empty": {
+              "type": "boolean"
+            }
+          }
+        },
+        "offset": {
+          "type": "integer"
+        },
+        "pageSize": {
+          "type": "integer"
+        },
+        "pageNumber": {
+          "type": "integer"
+        },
+        "paged": {
+          "type": "boolean"
+        },
+        "unpaged": {
+          "type": "boolean"
+        }
+      }
+    },
+    "last": {
+      "type": "boolean"
+    },
+    "totalPages": {
+      "type": "integer"
+    },
+    "totalElements": {
+      "type": "integer"
+    },
+    "size": {
+      "type": "integer"
+    },
+    "number": {
+      "type": "integer"
+    },
+    "sort": {
+      "type": "object",
+      "required": [
+        "sorted",
+        "unsorted",
+        "empty"
+      ],
+      "properties": {
+        "sorted": {
+          "type": "boolean"
+        },
+        "unsorted": {
+          "type": "boolean"
+        },
+        "empty": {
+          "type": "boolean"
+        }
+      }
+    },
+    "numberOfElements": {
+      "type": "integer"
+    },
+    "first": {
+      "type": "boolean"
+    },
+    "empty": {
+      "type": "boolean"
+    }
+  }
+}
