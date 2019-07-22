@@ -1,5 +1,6 @@
 package com.hotmart.playground.comment;
 
+import com.hotmart.playground.category.Category;
 import com.hotmart.playground.idea.Idea;
 import com.hotmart.playground.security.UserDetailsDto;
 import org.modelmapper.ModelMapper;
@@ -47,8 +48,14 @@ public class CommentController {
                           @NotNull @PathVariable("ideaId") final Long ideaId,
                           @AuthenticationPrincipal @ApiIgnore final UserDetailsDto user) {
 
-        //TODO create comment
-        return new Comment();
+    	Idea idea = Idea.builder()
+    			.id(ideaId)
+    			.build();
+
+    	Comment comment = modelMapper.map(commentDto, Comment.class);
+    	comment.setIdea(idea);
+    	comment.setUser(user.toEntity());
+    	return commentService.save(comment);
     }
 
     @DeleteMapping("{commentId}")
@@ -56,6 +63,16 @@ public class CommentController {
                        @NotNull @PathVariable("commentId") final Long commentId,
                        @AuthenticationPrincipal @ApiIgnore final UserDetailsDto user) {
 
-        //TODO delete comment
+    	Idea idea = Idea.builder()
+    			.id(ideaId)
+    			.build();
+    	
+    	Comment comment = Comment.builder()
+    					.id(commentId)
+    					.idea(idea)
+    					.user(user.toEntity())
+    					.build();
+    	
+        commentService.delete(comment, user.toEntity());
     }
 }

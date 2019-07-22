@@ -31,8 +31,17 @@ public class CommentService {
 
     @Transactional
     public Comment save(final Comment comment) {
-        //TODO Create method to save comment
-        return null;
+    	commentRepository.save(comment);
+    	applicationEventPublisher.publishEvent(
+    			UpdateIdeaStatsEvent.builder()
+    				.source(this)
+    				.type(InteractionType.COMMENT)
+    				.idea(comment.getIdea())
+    				.user(comment.getUser())
+    				.action(EntityAction.CREATE)
+    				.build()
+    			);
+        return comment;
     }
 
     @Transactional
@@ -46,6 +55,7 @@ public class CommentService {
                     UpdateIdeaStatsEvent.builder()
                             .source(this)
                             .type(InteractionType.COMMENT)
+                            .idea(comment.getIdea())
                             .user(commentToDelete.getUser())
                             .action(EntityAction.DELETE)
                             .build()
