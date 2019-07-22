@@ -40,6 +40,12 @@ public class IdeaInteractionService {
 
     @Transactional
     public void like(final Idea idea, final User user) {
+        // user already dislike?
+    	boolean alreadyDisliked = ideaInteractionRepository.existsByIdeaAndUserAndType(idea, user, InteractionType.DISLIKE);
+        if (alreadyDisliked) {
+        	deleteDislike(idea, user);
+        }
+        
         boolean alreadyLiked = ideaInteractionRepository.existsByIdeaAndUserAndType(idea, user, InteractionType.LIKE);
         if (alreadyLiked) {
             return;
@@ -59,6 +65,12 @@ public class IdeaInteractionService {
 
     @Transactional
     public void dislike(final Idea idea, final User user) {
+        // user already like?
+    	boolean alreadyLiked = ideaInteractionRepository.existsByIdeaAndUserAndType(idea, user, InteractionType.LIKE);
+        if (alreadyLiked) {
+        	deleteLike(idea, user);
+        }
+        
         boolean alreadyDisliked = ideaInteractionRepository.existsByIdeaAndUserAndType(idea, user, InteractionType.DISLIKE);
         if (alreadyDisliked) {
             return;
