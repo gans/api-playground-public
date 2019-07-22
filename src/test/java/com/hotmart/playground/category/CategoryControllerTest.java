@@ -106,7 +106,7 @@ public class CategoryControllerTest extends IntegrationTest {
     public void create_ReturnBadRequest_IfImageIsMissing(@Random User user) {
         userRepository.save(user);
 
-        newAuthenticatedRequest(null)
+        newAuthenticatedRequest(user)
                 .given()
                     .multiPart(NAME, NAME)
                     .multiPart(DESCRIPTION, DESCRIPTION)
