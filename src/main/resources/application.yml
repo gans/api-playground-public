@@ -20,6 +20,12 @@ spring:
   data:
     rest:
       basePath: /api
+    elasticsearch:
+      cluster-name: elasticsearch
+      cluster-nodes: 127.0.0.1:9300
+      repositories:
+        enabled: true
+      
   datasource:
     url: jdbc:h2:~/.playground/database;MODE=MYSQL;DB_CLOSE_DELAY=-1
     driverClassName: org.h2.Driver
@@ -35,7 +41,7 @@ spring:
         format_sql: true
   liquibase:
     contexts: dev
-
+  
 management:
   endpoints:
     web:
@@ -50,3 +56,4 @@ api:
 
 storage:
   location: .playground/storage
+  

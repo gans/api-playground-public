@@ -1,5 +1,7 @@
 package com.hotmart.playground.idea;
 
+import com.hotmart.playground.es.Ideadoc;
+import com.hotmart.playground.es.IdeadocService;
 import com.hotmart.playground.security.UserDetailsDto;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
@@ -27,10 +29,13 @@ public class IdeaController {
     private final ModelMapper modelMapper;
 
     private final IdeaService ideaService;
+    
+    private final IdeadocService ideadocService;
 
-    public IdeaController(ModelMapper modelMapper, IdeaService ideaService) {
+    public IdeaController(ModelMapper modelMapper, IdeaService ideaService, IdeadocService ideadocService) {
         this.modelMapper = modelMapper;
         this.ideaService = ideaService;
+        this.ideadocService = ideadocService;
     }
 
     @GetMapping
@@ -48,7 +53,19 @@ public class IdeaController {
         Idea idea = modelMapper.map(ideaDto, Idea.class);
         idea.setId(null);
         idea.setUser(user.toEntity());
-        return ideaService.save(idea);
+        idea = ideaService.save(idea);
+        
+        /*
+        Ideadoc doc = Ideadoc.builder()
+        		.id(idea.getId().toString())
+        		.title(idea.getTitle())
+        		.build();
+        		*/
+        Ideadoc doc = new Ideadoc(idea.getId().toString(), idea.getTitle());
+        
+        ideadocService.save(doc);
+        
+        return idea;
     }
 
     @GetMapping("newest")
