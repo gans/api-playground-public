@@ -16,7 +16,7 @@
         <jwt.version>1.0.10.RELEASE</jwt.version>
         <modelmapper.version>2.3.2</modelmapper.version>
         <spring-restdocs.version>2.0.3.RELEASE</spring-restdocs.version>
-        <tika-core.version>1.20</tika-core.version>
+        <tika-core.version>1.28.3</tika-core.version>
         <springfox-swagger2.version>2.9.2</springfox-swagger2.version>
         <passay.version>1.0</passay.version>
         <junit-jupiter-engine.version>5.3.1</junit-jupiter-engine.version>
